@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using TMPro;
 
 public class ChartMenuManager : MonoBehaviour
@@ -7,8 +7,17 @@ public class ChartMenuManager : MonoBehaviour
     public GameObject chartTypeDropdownGO;
     public GameObject chartStyleDropdownGO;
 
+    // Todos os Spawners para os estilos do tipo Line
     public GameObject stepChartSpawner;
     public GameObject dashedChartSpawner;
+    public GameObject smoothChartSpawner;
+    public GameObject areaChartSpawner;
+    public GameObject basicChartSpawner;
+    public GameObject logChartSpawner;
+    public GameObject smoothAreaChartSpawner;
+    public GameObject stackAreaChartSpawner;
+    public GameObject stackChartSpawner;
+    public GameObject timeChartSpawner;
 
     private TMP_Dropdown csvDropdown;
     private TMP_Dropdown chartTypeDropdown;
@@ -16,7 +25,6 @@ public class ChartMenuManager : MonoBehaviour
 
     void Start()
     {
-        // ObtÈm os componentes dos GameObjects com seguranÁa
         csvDropdown = csvDropdownGO.GetComponentInChildren<TMP_Dropdown>();
         chartTypeDropdown = chartTypeDropdownGO.GetComponentInChildren<TMP_Dropdown>();
         chartStyleDropdown = chartStyleDropdownGO.GetComponentInChildren<TMP_Dropdown>();
@@ -32,22 +40,46 @@ public class ChartMenuManager : MonoBehaviour
 
         if (chartType == "Line")
         {
-            if (chartStyle == "Step")
+            switch (chartStyle)
             {
-                stepChartSpawner.GetComponent<CSVLineChartStep>().LoadCSVAndCreateChart(csvName);
-            }
-            else if (chartStyle == "Dashed")
-            {
-                dashedChartSpawner.GetComponent<CSVLineChartDashed>().LoadCSVAndCreateChart(csvName);
-            }
-            else
-            {
-                Debug.LogWarning("Estilo de linha n„o suportado.");
+                case "Step":
+                    stepChartSpawner.GetComponent<CSVLineChartStep>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Dashed":
+                    dashedChartSpawner.GetComponent<CSVLineChartDashed>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Smooth":
+                    smoothChartSpawner.GetComponent<CSVLineChartSmooth>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Area":
+                    areaChartSpawner.GetComponent<CSVLineChartArea>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Basic":
+                    basicChartSpawner.GetComponent<CSVLineChartBasic>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Log":
+                    logChartSpawner.GetComponent<CSVLineChartLog>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Smooth Area":
+                    smoothAreaChartSpawner.GetComponent<CSVLineChartSmoothArea>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Stack Area":
+                    stackAreaChartSpawner.GetComponent<CSVLineChartStackArea>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Stack":
+                    stackChartSpawner.GetComponent<CSVLineChartStack>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Time":
+                    timeChartSpawner.GetComponent<CSVLineChartTime>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de linha n√£o suportado.");
+                    break;
             }
         }
         else
         {
-            Debug.LogWarning("Tipo de gr·fico n„o suportado.");
+            Debug.LogWarning("Tipo de gr√°fico n√£o suportado.");
         }
     }
 }
