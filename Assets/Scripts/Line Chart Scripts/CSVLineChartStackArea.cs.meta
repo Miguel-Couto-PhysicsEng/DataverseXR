@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - chartPrefab: {fileID: 7768487522662116631, guid: 0683ce1f7a3eb804a813f423bff7ad9c, type: 3}
+  - chartPrefab: {fileID: 4254563199524326881, guid: 0683ce1f7a3eb804a813f423bff7ad9c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// ChartDropdownPopulator.cs
+using UnityEngine;
 using TMPro;
 using System.IO;
 using System.Linq;
@@ -14,16 +15,17 @@ public class ChartDropdownPopulator : MonoBehaviour
     private TMP_Dropdown chartTypeDropdown;
     private TMP_Dropdown chartStyleDropdown;
 
-    // ✅ Nomes curtos e consistentes com ChartMenuManager.cs
     private readonly Dictionary<string, List<string>> styleOptions = new Dictionary<string, List<string>>()
     {
         { "Line", new List<string> {
-            "Smooth", "Step", "Dashed",
-            "Area", "Basic", "Log",
-            "Smooth Area", "Stack Area", "Stack", "Time"
+            "Basic", "Smooth", "Smooth Area", "Step", "Dashed", "Log"
         }},
-        { "Bar", new List<string> { "Basic", "Stacked" } },
-        { "Scatter", new List<string> { "Basic" } }
+
+        { "Bar", new List<string> {
+            "Basic Bar", "Percent Column", "Stacked Column", "Zebra Column"
+        }},
+
+        { "Pie", new List<string> { "Basic", "Donut", "Rose" } }
     };
 
     void Start()

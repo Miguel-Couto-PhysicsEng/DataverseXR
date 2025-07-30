@@ -1,13 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 using XCharts.Runtime;
 using System.Collections.Generic;
 using System.Globalization;
 
-public class CSVLineChartDashed : MonoBehaviour
+public class CSVBarChartBasicColumn : MonoBehaviour
 {
     public GameObject chartPrefab;
     public string csvName;
-
     public Vector3 spawnWorldScale = new Vector3(0.03f, 0.03f, 0.03f);
 
     public void LoadCSVAndCreateChart(string csvName)
@@ -15,7 +14,7 @@ public class CSVLineChartDashed : MonoBehaviour
         TextAsset csvFile = Resources.Load<TextAsset>("CSVFiles/" + csvName);
         if (csvFile == null)
         {
-            Debug.LogError("Ficheiro CSV n�o encontrado: " + csvName);
+            Debug.LogError("Ficheiro CSV não encontrado: " + csvName);
             return;
         }
 
@@ -31,7 +30,7 @@ public class CSVLineChartDashed : MonoBehaviour
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("Canvas n�o encontrado na cena.");
+            Debug.LogError("Canvas não encontrado na cena.");
             Destroy(chartGO);
             return;
         }
@@ -39,27 +38,21 @@ public class CSVLineChartDashed : MonoBehaviour
         chartGO.transform.SetParent(canvas.transform, false);
 
         Transform menu = GameObject.Find("Menu - Generate Chart Button")?.transform;
-        if (menu != null)
-        {
-            Vector3 menuPos = menu.position;
-            chartGO.transform.position = new Vector3(menuPos.x + 4.5f, menuPos.y, menuPos.z);
-        }
-        else
-        {
-            chartGO.transform.position = new Vector3(12f, 0f, 1f); // fallback
-        }
+        chartGO.transform.position = menu != null
+            ? new Vector3(menu.position.x + 4.5f, menu.position.y, menu.position.z)
+            : new Vector3(12f, 0f, 1f);
 
         chartGO.transform.localScale = spawnWorldScale;
 
         BaseChart chart = chartGO.GetComponent<BaseChart>();
         if (chart == null)
         {
-            Debug.LogError("O prefab n�o tem um componente BaseChart.");
+            Debug.LogError("O prefab não tem um componente BaseChart.");
             return;
         }
 
         chart.ClearData();
-        chart.EnsureChartComponent<Title>().text = "LineChart Dashed";
+        chart.EnsureChartComponent<Title>().text = "Basic Column Chart";
 
         // Ativar legenda
         var legend = chart.EnsureChartComponent<Legend>();
@@ -71,49 +64,52 @@ public class CSVLineChartDashed : MonoBehaviour
         legend.location.right = 5;
         legend.location.top = 5;
 
-        // Ler cabe�alhos da primeira linha
         string[] headers = lines[0].Trim().Split(';');
         int columnCount = headers.Length;
 
-        // Adiciona uma s�rie por cada coluna Y com estilo dashed
-        for (int s = 1; s < columnCount; s++)
+        int dataColumnCount = columnCount - 1;
+
+        // Lê os dados e adiciona a cada série existente (como no Smooth Area)
+        for (int s = 0; s < dataColumnCount; s++)
         {
-            var serie = chart.AddSerie<Line>(headers[s]);
-            serie.lineStyle.type = LineStyle.Type.Dashed;
-        }
+            if (s >= chart.series.Count) break;
 
-        // Adicionar os dados
-        for (int i = 1; i < lines.Length; i++)
-        {
-            string line = lines[i].Trim();
-            if (string.IsNullOrEmpty(line)) continue;
+            var serie = chart.series[s];
+            serie.show = true;
+            serie.data.Clear();
 
-            string[] values = line.Split(';');
-            if (values.Length < 2) continue;
+            // Atualiza nome da legenda
+            legend.RemoveData("serie" + s);
+            legend.AddData(headers[s + 1]);
 
-            if (!float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal))
-                continue;
-
-            for (int s = 1; s < Mathf.Min(values.Length, columnCount); s++)
+            for (int i = 1; i < lines.Length; i++)
             {
-                if (float.TryParse(values[s], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal))
-                {
-                    chart.AddData(s - 1, xVal, yVal);
-                }
+                string line = lines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+
+                string[] values = line.Split(';');
+                if (values.Length < columnCount) continue;
+
+                if (!float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal)) continue;
+                if (!float.TryParse(values[s + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal)) continue;
+
+                serie.AddXYData(xVal, yVal);
             }
         }
 
-        // Mostrar eixo X
+        // Remove séries extra
+        while (chart.series.Count > dataColumnCount)
+        {
+            chart.series.RemoveAt(chart.series.Count - 1);
+        }
+
+        // Configuração do eixo X numérico
         var xAxis = chart.EnsureChartComponent<XAxis>();
         xAxis.show = true;
         xAxis.type = Axis.AxisType.Value;
-        xAxis.splitNumber = 5;
         xAxis.axisLine.show = true;
         xAxis.axisTick.show = true;
         xAxis.axisLabel.show = true;
     }
 }
-
-
-
 

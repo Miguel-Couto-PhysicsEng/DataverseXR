@@ -311,8 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chartPrefab: {fileID: 5888554127920524083, guid: 2d23da8600e750348ae1a4b1b47bc157, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!4 &51885107
 Transform:
   m_ObjectHideFlags: 0
@@ -672,9 +672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af6c5d1bd5556d4a822dd8255016a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chartPrefab: {fileID: 8983046601019578750, guid: cd4db4b636d55b74085fc2ed0de0df24, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
+  chartPrefab: {fileID: 2921284687568941591, guid: cd4db4b636d55b74085fc2ed0de0df24, type: 3}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!1 &129757153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1627,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1312917046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &301836288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301836290}
+  - component: {fileID: 301836289}
+  m_Layer: 0
+  m_Name: PercentageBarChartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &301836289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301836288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33752731bd46baa4db2e19cc0e4dd94a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chartPrefab: {fileID: 7594476456521815212, guid: 794879bf4a085874dada15811eba5714, type: 3}
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
+--- !u!4 &301836290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301836288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.83498, y: 0, z: 2.66697}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &302030134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2122,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1290041144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &351491086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351491087}
+  - component: {fileID: 351491088}
+  m_Layer: 0
+  m_Name: PieRoseChartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351491087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351491086}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.83498, y: 0, z: 2.66697}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &351491088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351491086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489df22bf3b6b3248bd31faac7a1975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chartPrefab: {fileID: 6480309825758748572, guid: 5028c9e29a639cf4584ea2111c285607, type: 3}
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!1 &352330103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,8 +2791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chartPrefab: {fileID: 1218127018464689204, guid: 3b639b9314a9e344e9f44f45e571a2a0, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!4 &476881679
 Transform:
   m_ObjectHideFlags: 0
@@ -3285,8 +3377,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chartPrefab: {fileID: 7223736388469900824, guid: 66a70815b5573b34d8f8d8128b9eec3a, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!4 &556853413
 Transform:
   m_ObjectHideFlags: 0
@@ -4225,6 +4317,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 27191550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &662298860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662298861}
+  - component: {fileID: 662298862}
+  m_Layer: 0
+  m_Name: PieChartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &662298861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662298860}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.83498, y: 0, z: 2.66697}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &662298862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662298860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0828916cb6949164c8ff8eb8fba34141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chartPrefab: {fileID: 3117552341917708454, guid: 86e5df7223978de4593e7cc93b0ec7fb, type: 3}
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!1 &685528981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4724,8 +4862,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chartPrefab: {fileID: 2784698511121823826, guid: 304f54610b946774cbc31a5cb9345193, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!4 &770426171
 Transform:
   m_ObjectHideFlags: 0
@@ -5004,6 +5142,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 151558929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &822250695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822250696}
+  - component: {fileID: 822250697}
+  m_Layer: 0
+  m_Name: basicBarChartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822250696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822250695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.10071, y: -113.86077, z: 274.51453}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &822250697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822250695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b26c24a6a83dfd4a96450b33bec74b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chartPrefab: {fileID: 4049405687445496968, guid: f3e5259e35a887f47a541a65b90301ae, type: 3}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!1 &827646311
 GameObject:
   m_ObjectHideFlags: 0
@@ -5532,7 +5717,7 @@ Transform:
   - {fileID: 1888462793}
   m_Father: {fileID: 649439703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &867499084
+--- !u!1 &867518997
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5540,40 +5725,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 867499086}
-  - component: {fileID: 867499085}
+  - component: {fileID: 867518999}
+  - component: {fileID: 867518998}
   m_Layer: 0
-  m_Name: StackAreaChartSpawner
+  m_Name: zebraBarChartSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &867499085
+--- !u!114 &867518998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867499084}
+  m_GameObject: {fileID: 867518997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a902bf8cbdd672b4c844301aa26e34cc, type: 3}
+  m_Script: {fileID: 11500000, guid: c135998990cb66646a9516b24ef097ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chartPrefab: {fileID: 7768487522662116631, guid: 0683ce1f7a3eb804a813f423bff7ad9c, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
---- !u!4 &867499086
+  chartPrefab: {fileID: 2183750832989032128, guid: c4f84e3156464344fb3492025b74b297, type: 3}
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
+--- !u!4 &867518999
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867499084}
+  m_GameObject: {fileID: 867518997}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.89442, y: 1.66059, z: 2.31691}
+  m_LocalPosition: {x: 2.10071, y: -113.86077, z: 274.51453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6500,53 +6684,6 @@ Transform:
   - {fileID: 1643892874}
   m_Father: {fileID: 2137325980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &966520216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 966520218}
-  - component: {fileID: 966520217}
-  m_Layer: 0
-  m_Name: AreaChartSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &966520217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966520216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0f01be0118b23488c2fe1be50509a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chartPrefab: {fileID: 5452535379817801479, guid: 9aeee339f36ad0f4ca5003dfb9bf52d5, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
---- !u!4 &966520218
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966520216}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.10342, y: -48.24361, z: 293.7642}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &970649463
 GameObject:
   m_ObjectHideFlags: 0
@@ -6957,13 +7094,16 @@ MonoBehaviour:
   stepChartSpawner: {fileID: 51885105}
   dashedChartSpawner: {fileID: 476881677}
   smoothChartSpawner: {fileID: 770426169}
-  areaChartSpawner: {fileID: 966520216}
   basicChartSpawner: {fileID: 556853411}
   logChartSpawner: {fileID: 1339528300}
   smoothAreaChartSpawner: {fileID: 115430023}
-  stackAreaChartSpawner: {fileID: 867499084}
-  stackChartSpawner: {fileID: 1733502628}
-  timeChartSpawner: {fileID: 1484356052}
+  basicBarChartSpawner: {fileID: 822250695}
+  percentColumnChartSpawner: {fileID: 301836288}
+  stackedColumnChartSpawner: {fileID: 1300848288}
+  zebraColumnChartSpawner: {fileID: 867518997}
+  basicPieChartSpawner: {fileID: 662298860}
+  donutPieChartSpawner: {fileID: 1335870890}
+  radiusRoseChartSpawner: {fileID: 351491086}
 --- !u!4 &1042035351
 Transform:
   m_ObjectHideFlags: 0
@@ -8915,6 +9055,52 @@ Transform:
   - {fileID: 987187999}
   m_Father: {fileID: 966216260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1300848288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300848290}
+  - component: {fileID: 1300848289}
+  m_Layer: 0
+  m_Name: StackedBarChartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1300848289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300848288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f514e5354912eb49b8321c1cf564650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chartPrefab: {fileID: 2822395506952770362, guid: 387ea5e4f0c20634f9090ea09dc4a8a9, type: 3}
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
+--- !u!4 &1300848290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300848288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.83498, y: 0, z: 2.66697}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302905194
 GameObject:
   m_ObjectHideFlags: 0
@@ -9099,6 +9285,52 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.034548517, y: 0.00051147584, z: 0.000073043164}
     m_Extent: {x: 0.0009967126, y: 0.0020704698, z: 0.0044533596}
   m_DirtyAABB: 0
+--- !u!1 &1335870890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1335870891}
+  - component: {fileID: 1335870892}
+  m_Layer: 0
+  m_Name: PieDonutChartSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1335870891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335870890}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.83498, y: 0, z: 2.66697}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335870892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335870890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ee770468c50a74c865c4d793dacb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chartPrefab: {fileID: 4979552216363564936, guid: 5c95bce53e339834b9d0ede1c1dddb9f, type: 3}
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!1 &1338359932
 GameObject:
   m_ObjectHideFlags: 0
@@ -9191,8 +9423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chartPrefab: {fileID: 2695585370525910538, guid: 823b59a3947589b4abed0034746d308d, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
+  csvName: 
+  spawnWorldScale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!4 &1339528302
 Transform:
   m_ObjectHideFlags: 0
@@ -10156,7 +10388,7 @@ Transform:
   m_GameObject: {fileID: 1440394330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: -0.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10558,53 +10790,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1484356052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1484356054}
-  - component: {fileID: 1484356053}
-  m_Layer: 0
-  m_Name: TimeChartSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1484356053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484356052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f8bd4d5477053a4b8a4adcaf27bbf32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chartPrefab: {fileID: 7504946269533931881, guid: e9871f4ba30e44d45abbdd678e7fcad6, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
---- !u!4 &1484356054
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484356052}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.89442, y: 1.66059, z: 2.31691}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1489250586
 GameObject:
   m_ObjectHideFlags: 0
@@ -13217,53 +13402,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1637571247}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1733502628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1733502630}
-  - component: {fileID: 1733502629}
-  m_Layer: 0
-  m_Name: StackChartSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1733502629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733502628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf6178e56514914db409394f87c5ce3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chartPrefab: {fileID: 8113579254613555814, guid: 20255c51d19bba14cbd3224fbfd57c7f, type: 3}
-  spawnPosition: {x: 1.5, y: 1, z: 2}
-  chartSize: {x: 600, y: 400}
---- !u!4 &1733502630
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733502628}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.89442, y: 1.66059, z: 2.31691}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1756536715
 GameObject:
@@ -16714,10 +16852,13 @@ SceneRoots:
   - {fileID: 51885107}
   - {fileID: 476881679}
   - {fileID: 770426171}
-  - {fileID: 966520218}
   - {fileID: 556853413}
   - {fileID: 1339528302}
   - {fileID: 115430024}
-  - {fileID: 867499086}
-  - {fileID: 1733502630}
-  - {fileID: 1484356054}
+  - {fileID: 822250696}
+  - {fileID: 301836290}
+  - {fileID: 1300848290}
+  - {fileID: 867518999}
+  - {fileID: 662298861}
+  - {fileID: 1335870891}
+  - {fileID: 351491087}

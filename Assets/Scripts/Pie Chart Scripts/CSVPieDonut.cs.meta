@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2af6c5d1bd5556d4a822dd8255016a1b
+guid: 08ee770468c50a74c865c4d793dacb49
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - chartPrefab: {fileID: 2921284687568941591, guid: cd4db4b636d55b74085fc2ed0de0df24, type: 3}
+  - chartPrefab: {fileID: 4979552216363564936, guid: 5c95bce53e339834b9d0ede1c1dddb9f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

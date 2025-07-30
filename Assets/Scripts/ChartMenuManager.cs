@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Linq;
 using TMPro;
+using UnityEngine;
+using XCharts.Runtime;
 
 public class ChartMenuManager : MonoBehaviour
 {
@@ -7,17 +9,24 @@ public class ChartMenuManager : MonoBehaviour
     public GameObject chartTypeDropdownGO;
     public GameObject chartStyleDropdownGO;
 
-    // Todos os Spawners para os estilos do tipo Line
+    // Line chart spawners
     public GameObject stepChartSpawner;
     public GameObject dashedChartSpawner;
     public GameObject smoothChartSpawner;
-    public GameObject areaChartSpawner;
     public GameObject basicChartSpawner;
     public GameObject logChartSpawner;
     public GameObject smoothAreaChartSpawner;
-    public GameObject stackAreaChartSpawner;
-    public GameObject stackChartSpawner;
-    public GameObject timeChartSpawner;
+
+    // Bar chart spawners
+    public GameObject basicBarChartSpawner;
+    public GameObject percentColumnChartSpawner;
+    public GameObject stackedColumnChartSpawner;
+    public GameObject zebraColumnChartSpawner;
+
+    // Pie chart spawners
+    public GameObject basicPieChartSpawner;
+    public GameObject donutPieChartSpawner;
+    public GameObject radiusRoseChartSpawner;
 
     private TMP_Dropdown csvDropdown;
     private TMP_Dropdown chartTypeDropdown;
@@ -28,6 +37,9 @@ public class ChartMenuManager : MonoBehaviour
         csvDropdown = csvDropdownGO.GetComponentInChildren<TMP_Dropdown>();
         chartTypeDropdown = chartTypeDropdownGO.GetComponentInChildren<TMP_Dropdown>();
         chartStyleDropdown = chartStyleDropdownGO.GetComponentInChildren<TMP_Dropdown>();
+
+        // Depuração para verificar as opções disponíveis
+        Debug.Log("Opções de Estilo no Dropdown: " + string.Join(", ", chartStyleDropdown.options.Select(opt => opt.text)));
     }
 
     public void GenerateChart()
@@ -51,9 +63,6 @@ public class ChartMenuManager : MonoBehaviour
                 case "Smooth":
                     smoothChartSpawner.GetComponent<CSVLineChartSmooth>().LoadCSVAndCreateChart(csvName);
                     break;
-                case "Area":
-                    areaChartSpawner.GetComponent<CSVLineChartArea>().LoadCSVAndCreateChart(csvName);
-                    break;
                 case "Basic":
                     basicChartSpawner.GetComponent<CSVLineChartBasic>().LoadCSVAndCreateChart(csvName);
                     break;
@@ -63,23 +72,53 @@ public class ChartMenuManager : MonoBehaviour
                 case "Smooth Area":
                     smoothAreaChartSpawner.GetComponent<CSVLineChartSmoothArea>().LoadCSVAndCreateChart(csvName);
                     break;
-                case "Stack Area":
-                    stackAreaChartSpawner.GetComponent<CSVLineChartStackArea>().LoadCSVAndCreateChart(csvName);
+                default:
+                    Debug.LogWarning("Estilo de linha não suportado: " + chartStyle);
                     break;
-                case "Stack":
-                    stackChartSpawner.GetComponent<CSVLineChartStack>().LoadCSVAndCreateChart(csvName);
+            }
+        }
+        else if (chartType == "Bar")
+        {
+            switch (chartStyle)
+            {
+                case "Basic Bar":
+                    basicBarChartSpawner.GetComponent<CSVBarChartBasicBar>().LoadCSVAndCreateChart(csvName);
                     break;
-                case "Time":
-                    timeChartSpawner.GetComponent<CSVLineChartTime>().LoadCSVAndCreateChart(csvName);
+                case "Percent Column":
+                    percentColumnChartSpawner.GetComponent<CSVBarChartPercentColumn>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Stacked Column":
+                    stackedColumnChartSpawner.GetComponent<CSVBarChartStackedColumn>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Zebra Column":
+                    zebraColumnChartSpawner.GetComponent<CSVBarChartZebraColumn>().LoadCSVAndCreateChart(csvName);
                     break;
                 default:
-                    Debug.LogWarning("Estilo de linha não suportado.");
+                    Debug.LogWarning("Estilo de barras não suportado: " + chartStyle);
+                    break;
+            }
+        }
+        else if (chartType == "Pie")
+        {
+            switch (chartStyle)
+            {
+                case "Basic":
+                    basicPieChartSpawner.GetComponent<CSVPieBasicWithLabel>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Rose":
+                    radiusRoseChartSpawner.GetComponent<CSVPieRadiusRoseChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Donut":
+                    donutPieChartSpawner.GetComponent<CSVPieDonut>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de pie não suportado: " + chartStyle);
                     break;
             }
         }
         else
         {
-            Debug.LogWarning("Tipo de gráfico não suportado.");
+            Debug.LogWarning("Tipo de gráfico não suportado: " + chartType);
         }
     }
 }

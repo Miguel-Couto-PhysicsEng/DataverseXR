@@ -8,9 +8,7 @@ public class CSVLineChartBasic : MonoBehaviour
     public GameObject chartPrefab;
     public string csvName;
 
-    // Posição e escala desejada
-    public Vector3 spawnPosition = new Vector3(12f, 0f, 1f);
-    public Vector3 spawnScale = new Vector3(0.03f, 0.03f, 0.03f);
+    public Vector3 spawnWorldScale = new Vector3(0.03f, 0.03f, 0.03f);
 
     public void LoadCSVAndCreateChart(string csvName)
     {
@@ -28,11 +26,8 @@ public class CSVLineChartBasic : MonoBehaviour
             return;
         }
 
-        // Criar o gráfico
         GameObject chartGO = Instantiate(chartPrefab);
 
-        
-        // Colocar dentro do Canvas
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
@@ -42,12 +37,20 @@ public class CSVLineChartBasic : MonoBehaviour
         }
 
         chartGO.transform.SetParent(canvas.transform, false);
-        chartGO.transform.localScale = spawnScale;
-        chartGO.transform.localPosition = spawnPosition; // <- respeita (12, 0, 1)
 
+        Transform menu = GameObject.Find("Menu - Generate Chart Button")?.transform;
+        if (menu != null)
+        {
+            Vector3 menuPos = menu.position;
+            chartGO.transform.position = new Vector3(menuPos.x + 4.5f, menuPos.y, menuPos.z);
+        }
+        else
+        {
+            chartGO.transform.position = new Vector3(12f, 0f, 1f); // fallback
+        }
 
+        chartGO.transform.localScale = spawnWorldScale;
 
-        // Adicionar dados ao gráfico
         BaseChart chart = chartGO.GetComponent<BaseChart>();
         if (chart == null)
         {
@@ -55,13 +58,33 @@ public class CSVLineChartBasic : MonoBehaviour
             return;
         }
 
-        // Limpar dados anteriores
         chart.ClearData();
-
         chart.EnsureChartComponent<Title>().text = "LineChart";
-        chart.AddSerie<Line>();
 
-        // Lê dados do CSV (assume separador ';')
+        // Ativar legenda
+        var legend = chart.EnsureChartComponent<Legend>();
+        legend.show = true;
+        legend.orient = Orient.Vertical;
+        legend.itemWidth = 5;  // ainda menor
+        legend.itemHeight = 5;
+        legend.location.align = Location.Align.TopRight;
+        legend.location.right = 5;  // margem mais justa à direita
+        legend.location.top = 5;    // mais margem ao topo
+
+
+
+        // Ler cabeçalhos da primeira linha
+        string[] headers = lines[0].Trim().Split(';');
+        int columnCount = headers.Length;
+
+        // Adiciona uma série por cada coluna Y
+        for (int s = 1; s < columnCount; s++)
+        {
+            chart.AddSerie<Line>(headers[s]);
+        }
+
+
+        // Adicionar os dados
         for (int i = 1; i < lines.Length; i++)
         {
             string line = lines[i].Trim();
@@ -70,26 +93,25 @@ public class CSVLineChartBasic : MonoBehaviour
             string[] values = line.Split(';');
             if (values.Length < 2) continue;
 
-            if (float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal) &&
-                float.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal))
-            {
-                chart.AddData(0, xVal, yVal); // Serie 0
+            if (!float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal))
+                continue;
 
-                var xAxis = chart.EnsureChartComponent<XAxis>();
-                xAxis.show = true;
-                xAxis.type = Axis.AxisType.Value;
-                xAxis.splitNumber = 5;
-                xAxis.axisLine.show = true;
-                xAxis.axisTick.show = true;
-                xAxis.axisLabel.show = true;
-            }
-            else
+            for (int s = 1; s < Mathf.Min(values.Length, columnCount); s++)
             {
-                Debug.LogWarning($"Linha mal formatada no CSV: {line}");
+                if (float.TryParse(values[s], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal))
+                {
+                    chart.AddData(s - 1, xVal, yVal); // Série s-1 recebe o par (xVal, yVal)
+                }
             }
         }
+
+        // Mostrar eixo X
+        var xAxis = chart.EnsureChartComponent<XAxis>();
+        xAxis.show = true;
+        xAxis.type = Axis.AxisType.Value;
+        xAxis.splitNumber = 5;
+        xAxis.axisLine.show = true;
+        xAxis.axisTick.show = true;
+        xAxis.axisLabel.show = true;
     }
 }
-
-
-

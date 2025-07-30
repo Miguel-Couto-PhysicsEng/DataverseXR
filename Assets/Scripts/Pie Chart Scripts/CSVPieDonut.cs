@@ -3,11 +3,9 @@ using XCharts.Runtime;
 using System.Collections.Generic;
 using System.Globalization;
 
-public class CSVLineChartStep : MonoBehaviour
+public class CSVPieDonut : MonoBehaviour
 {
     public GameObject chartPrefab;
-    public string csvName;
-
     public Vector3 spawnWorldScale = new Vector3(0.03f, 0.03f, 0.03f);
 
     public void LoadCSVAndCreateChart(string csvName)
@@ -27,11 +25,10 @@ public class CSVLineChartStep : MonoBehaviour
         }
 
         GameObject chartGO = Instantiate(chartPrefab);
-
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("Canvas não encontrado na cena.");
+            Debug.LogError("Canvas não encontrado.");
             Destroy(chartGO);
             return;
         }
@@ -39,29 +36,22 @@ public class CSVLineChartStep : MonoBehaviour
         chartGO.transform.SetParent(canvas.transform, false);
 
         Transform menu = GameObject.Find("Menu - Generate Chart Button")?.transform;
-        if (menu != null)
-        {
-            Vector3 menuPos = menu.position;
-            chartGO.transform.position = new Vector3(menuPos.x + 4.5f, menuPos.y, menuPos.z);
-        }
-        else
-        {
-            chartGO.transform.position = new Vector3(12f, 0f, 1f); // fallback
-        }
+        chartGO.transform.position = menu != null
+            ? new Vector3(menu.position.x + 4.5f, menu.position.y, menu.position.z)
+            : new Vector3(12f, 0f, 1f);
 
         chartGO.transform.localScale = spawnWorldScale;
 
-        BaseChart chart = chartGO.GetComponent<BaseChart>();
+        PieChart chart = chartGO.GetComponent<PieChart>();
         if (chart == null)
         {
-            Debug.LogError("O prefab não tem um componente BaseChart.");
+            Debug.LogError("Prefab não tem PieChart.");
             return;
         }
 
-        chart.ClearData();
-        chart.EnsureChartComponent<Title>().text = "LineChart Step";
+        var title = chart.EnsureChartComponent<Title>();
+        title.text = "Donut Pie Chart";
 
-        // Ativar legenda
         var legend = chart.EnsureChartComponent<Legend>();
         legend.show = true;
         legend.orient = Orient.Vertical;
@@ -71,18 +61,19 @@ public class CSVLineChartStep : MonoBehaviour
         legend.location.right = 5;
         legend.location.top = 5;
 
-        // Ler cabeçalhos da primeira linha
-        string[] headers = lines[0].Trim().Split(';');
-        int columnCount = headers.Length;
-
-        // Adicionar séries com estilo StepStart
-        for (int s = 1; s < columnCount; s++)
+        Serie serie = chart.series.Count > 0 ? chart.series[0] : null;
+        if (serie == null)
         {
-            var serie = chart.AddSerie<Line>(headers[s]);
-            serie.lineType = LineType.StepStart;
+            Debug.LogError("serie0 não encontrada no PieChart.");
+            return;
         }
 
-        // Adicionar dados
+        // Definir raio interior e exterior (ex: 0.3 a 0.6 → donut)
+        serie.radius = new float[] { 0.15f, 0.3f };
+
+
+        serie.ClearData();
+
         for (int i = 1; i < lines.Length; i++)
         {
             string line = lines[i].Trim();
@@ -91,26 +82,13 @@ public class CSVLineChartStep : MonoBehaviour
             string[] values = line.Split(';');
             if (values.Length < 2) continue;
 
-            if (!float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal))
-                continue;
-
-            for (int s = 1; s < Mathf.Min(values.Length, columnCount); s++)
+            string label = values[0];
+            if (float.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out float val))
             {
-                if (float.TryParse(values[s], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal))
-                {
-                    chart.AddData(s - 1, xVal, yVal);
-                }
+                serie.AddData(new List<double> { val }, label);
             }
         }
 
-        // Mostrar eixo X
-        var xAxis = chart.EnsureChartComponent<XAxis>();
-        xAxis.show = true;
-        xAxis.type = Axis.AxisType.Value;
-        xAxis.splitNumber = 5;
-        xAxis.axisLine.show = true;
-        xAxis.axisTick.show = true;
-        xAxis.axisLabel.show = true;
+        chart.RefreshChart();
     }
 }
-

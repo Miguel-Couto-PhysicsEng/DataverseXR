@@ -1,55 +1,122 @@
-using UnityEngine;
+﻿using UnityEngine;
 using XCharts.Runtime;
-using System.Collections.Generic;
 using System.Globalization;
 
 public class CSVLineChartSmoothArea : MonoBehaviour
 {
     public GameObject chartPrefab;
-    public Vector3 spawnPosition = new Vector3(1.5f, 1f, 2f);
-    public Vector2 chartSize = new Vector2(600, 400);
+    public string csvName;
+    public Vector3 spawnWorldScale = new Vector3(0.03f, 0.03f, 0.03f);
 
     public void LoadCSVAndCreateChart(string csvName)
     {
         TextAsset csvFile = Resources.Load<TextAsset>("CSVFiles/" + csvName);
         if (csvFile == null)
         {
-            Debug.LogError("CSV n�o encontrado: " + csvName);
+            Debug.LogError("Ficheiro CSV não encontrado: " + csvName);
             return;
         }
 
         string[] lines = csvFile.text.Split('\n');
-        List<string> xLabels = new List<string>();
-        List<float> yValues = new List<float>();
+        if (lines.Length < 2) return;
 
-        for (int i = 1; i < lines.Length; i++)
+        GameObject chartGO = Instantiate(chartPrefab);
+
+        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
+        if (canvas == null)
         {
-            string[] values = lines[i].Split(';');
-            if (values.Length >= 2 &&
-                float.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out float y))
+            Debug.LogError("Canvas não encontrado na cena.");
+            Destroy(chartGO);
+            return;
+        }
+
+        chartGO.transform.SetParent(canvas.transform, false);
+
+        Transform menu = GameObject.Find("Menu - Generate Chart Button")?.transform;
+        chartGO.transform.position = menu != null
+            ? new Vector3(menu.position.x + 4.5f, menu.position.y, menu.position.z)
+            : new Vector3(12f, 0f, 1f);
+
+        chartGO.transform.localScale = spawnWorldScale;
+
+        LineChart chart = chartGO.GetComponent<LineChart>();
+        if (chart == null)
+        {
+            Debug.LogError("O prefab não tem um componente LineChart.");
+            return;
+        }
+
+        chart.ClearData();
+        chart.EnsureChartComponent<Title>().text = "Smooth Area Chart";
+
+        var legend = chart.EnsureChartComponent<Legend>();
+        legend.show = true;
+        legend.orient = Orient.Vertical;
+        legend.itemWidth = 5;
+        legend.itemHeight = 5;
+        legend.location.align = Location.Align.TopRight;
+        legend.location.right = 5;
+        legend.location.top = 5;
+
+        string[] headers = lines[0].Trim().Split(';');
+        int columnCount = headers.Length;
+        int neededSeries = columnCount - 1;
+
+        if (chart.series.Count < neededSeries)
+        {
+            Debug.LogError($"O gráfico precisa de pelo menos {neededSeries} séries no prefab, mas tem {chart.series.Count}.");
+            return;
+        }
+
+        int totalSeries = chart.series.Count;
+
+        // Preencher séries necessárias
+        legend.ClearData();  // limpa entradas antigas da legenda
+
+
+        for (int s = 0; s < neededSeries; s++)
+        {
+            Serie serie = chart.series[s];
+            serie.show = true;
+            serie.lineType = LineType.Smooth;
+            serie.areaStyle.show = true;
+            serie.itemStyle.opacity = 1f;
+            serie.lineStyle.width = 2f;
+            serie.areaStyle.opacity = 0.6f;
+            serie.data.Clear();
+
+            // 🔁 Remover nome antigo da legenda (se existir)
+            legend.RemoveData("serie" + s);
+
+            // ✅ Adiciona nome correto com base no CSV
+            legend.AddData(headers[s + 1]);
+
+            for (int i = 1; i < lines.Length; i++)
             {
-                xLabels.Add(values[0]);
-                yValues.Add(y);
+                string[] values = lines[i].Trim().Split(';');
+                if (values.Length <= s + 1) continue;
+
+                if (float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal) &&
+                    float.TryParse(values[s + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal))
+                {
+                    serie.AddXYData(xVal, yVal);
+                }
             }
         }
 
-        GameObject canvas = GameObject.Find("Canvas");
-        GameObject chartObj = Instantiate(chartPrefab, canvas.transform);
-        chartObj.name = "LineChart_SmoothArea(Clone)";
 
-        RectTransform rt = chartObj.GetComponent<RectTransform>();
-        if (rt != null)
+        // Remover séries extra (do fim para o início)
+        for (int s = totalSeries - 1; s >= neededSeries; s--)
         {
-            rt.localPosition = new Vector3(9f, 0f, 1f);
-            rt.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+            chart.series.RemoveAt(s);
         }
 
-        LineChart chart = chartObj.GetComponent<LineChart>();
 
-        for (int i = 0; i < xLabels.Count; i++)
-        {
-            chart.AddXAxisData(xLabels[i]);
-            chart.AddData(0, yValues[i]);
-        }
+        var xAxis = chart.EnsureChartComponent<XAxis>();
+        xAxis.type = Axis.AxisType.Value;
+        xAxis.show = true;
+        xAxis.axisLine.show = true;
+        xAxis.axisTick.show = true;
+        xAxis.axisLabel.show = true;
     }
 }
