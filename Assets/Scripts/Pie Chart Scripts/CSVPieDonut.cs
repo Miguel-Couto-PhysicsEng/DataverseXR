@@ -89,6 +89,10 @@ public class CSVPieDonut : MonoBehaviour
             }
         }
 
+
+        // ✅ Adicionar à dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
+
         chart.RefreshChart();
     }
 }

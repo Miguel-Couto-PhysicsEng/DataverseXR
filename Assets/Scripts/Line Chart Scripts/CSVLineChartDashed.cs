@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using XCharts.Runtime;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,7 +15,7 @@ public class CSVLineChartDashed : MonoBehaviour
         TextAsset csvFile = Resources.Load<TextAsset>("CSVFiles/" + csvName);
         if (csvFile == null)
         {
-            Debug.LogError("Ficheiro CSV n„o encontrado: " + csvName);
+            Debug.LogError("Ficheiro CSV n√£o encontrado: " + csvName);
             return;
         }
 
@@ -31,7 +31,7 @@ public class CSVLineChartDashed : MonoBehaviour
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("Canvas n„o encontrado na cena.");
+            Debug.LogError("Canvas n√£o encontrado na cena.");
             Destroy(chartGO);
             return;
         }
@@ -54,7 +54,7 @@ public class CSVLineChartDashed : MonoBehaviour
         BaseChart chart = chartGO.GetComponent<BaseChart>();
         if (chart == null)
         {
-            Debug.LogError("O prefab n„o tem um componente BaseChart.");
+            Debug.LogError("O prefab n√£o tem um componente BaseChart.");
             return;
         }
 
@@ -71,11 +71,11 @@ public class CSVLineChartDashed : MonoBehaviour
         legend.location.right = 5;
         legend.location.top = 5;
 
-        // Ler cabeÁalhos da primeira linha
+        // Ler cabe√ßalhos da primeira linha
         string[] headers = lines[0].Trim().Split(';');
         int columnCount = headers.Length;
 
-        // Adiciona uma sÈrie por cada coluna Y com estilo dashed
+        // Adiciona uma s√©rie por cada coluna Y com estilo dashed
         for (int s = 1; s < columnCount; s++)
         {
             var serie = chart.AddSerie<Line>(headers[s]);
@@ -111,6 +111,9 @@ public class CSVLineChartDashed : MonoBehaviour
         xAxis.axisLine.show = true;
         xAxis.axisTick.show = true;
         xAxis.axisLabel.show = true;
+
+        // ‚úÖ Adicionar √† dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
     }
 }
 

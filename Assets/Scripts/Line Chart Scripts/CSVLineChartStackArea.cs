@@ -130,6 +130,10 @@ public class CSVLineChartStackArea : MonoBehaviour
         yAxis.axisTick.show = true;
         yAxis.axisLabel.show = true;
 
+
+        // ✅ Adicionar à dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
+
         // Forçar atualização do gráfico
         chart.RefreshChart();
     }

@@ -102,6 +102,10 @@ public class CSVPieRadiusRoseChart : MonoBehaviour
         }
 
 
+        // ✅ Adicionar à dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
+
+
         chart.RefreshChart();
     }
 }

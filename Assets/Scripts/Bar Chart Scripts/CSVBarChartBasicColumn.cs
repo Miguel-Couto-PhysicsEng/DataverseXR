@@ -110,6 +110,10 @@ public class CSVBarChartBasicColumn : MonoBehaviour
         xAxis.axisLine.show = true;
         xAxis.axisTick.show = true;
         xAxis.axisLabel.show = true;
+
+
+        // ✅ Adicionar à dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
     }
 }
 

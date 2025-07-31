@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class CSVBarChartPercentColumn : MonoBehaviour
         TextAsset csvFile = Resources.Load<TextAsset>("CSVFiles/" + csvName);
         if (csvFile == null)
         {
-            Debug.LogError("Ficheiro CSV não encontrado: " + csvName);
+            Debug.LogError("Ficheiro CSV nÃ£o encontrado: " + csvName);
             return;
         }
 
@@ -30,7 +30,7 @@ public class CSVBarChartPercentColumn : MonoBehaviour
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("Canvas não encontrado na cena.");
+            Debug.LogError("Canvas nÃ£o encontrado na cena.");
             Destroy(chartGO);
             return;
         }
@@ -47,7 +47,7 @@ public class CSVBarChartPercentColumn : MonoBehaviour
         BaseChart chart = chartGO.GetComponent<BaseChart>();
         if (chart == null)
         {
-            Debug.LogError("O prefab não tem um componente BaseChart.");
+            Debug.LogError("O prefab nÃ£o tem um componente BaseChart.");
             return;
         }
 
@@ -68,19 +68,19 @@ public class CSVBarChartPercentColumn : MonoBehaviour
         int columnCount = headers.Length;
         int dataSeriesCount = columnCount - 1;
 
-        // Adiciona séries empilhadas
+        // Adiciona sÃ©ries empilhadas
         for (int s = 0; s < dataSeriesCount; s++)
         {
             var serie = chart.AddSerie<Bar>(headers[s + 1]);
             serie.stack = "total"; // Empilhamento para percentuais
-            // Removido barWidth para adaptação automática
-            // Opção manual: serie.barWidth = 15f; // Aumenta um pouco a largura (comente/descomente para testar)
+            // Removido barWidth para adaptaÃ§Ã£o automÃ¡tica
+            // OpÃ§Ã£o manual: serie.barWidth = 15f; // Aumenta um pouco a largura (comente/descomente para testar)
         }
 
-        // Lista para rastrear valores únicos de x
+        // Lista para rastrear valores Ãºnicos de x
         HashSet<float> uniqueXValues = new HashSet<float>();
 
-        // Lê os dados e normaliza para percentagens por linha
+        // LÃª os dados e normaliza para percentagens por linha
         for (int i = 1; i < lines.Length; i++)
         {
             string line = lines[i].Trim();
@@ -109,17 +109,17 @@ public class CSVBarChartPercentColumn : MonoBehaviour
 
             if (total == 0f) continue;
 
-            uniqueXValues.Add(xVal); // Adiciona xVal aos valores únicos
+            uniqueXValues.Add(xVal); // Adiciona xVal aos valores Ãºnicos
 
             for (int s = 0; s < dataSeriesCount; s++)
             {
                 float percent = (yValues[s] / total) * 100f;
-                Debug.Log($"x={xVal}, série={headers[s + 1]}, percent={percent}"); // Depuração
+                Debug.Log($"x={xVal}, sÃ©rie={headers[s + 1]}, percent={percent}"); // DepuraÃ§Ã£o
                 chart.series[s].AddXYData(xVal, percent);
             }
         }
 
-        // Configurações do eixo X (valores únicos com espaçamento inicial)
+        // ConfiguraÃ§Ãµes do eixo X (valores Ãºnicos com espaÃ§amento inicial)
         var xAxis = chart.EnsureChartComponent<XAxis>();
         xAxis.type = Axis.AxisType.Value;
         xAxis.axisLabel.show = true;
@@ -127,11 +127,11 @@ public class CSVBarChartPercentColumn : MonoBehaviour
         xAxis.axisTick.show = true;
         xAxis.minMaxType = Axis.AxisMinMaxType.Custom; // Controle manual
         float minX = uniqueXValues.Count > 0 ? uniqueXValues.Min() : 0f;
-        xAxis.min = minX > 0 ? minX - 1f : 0f; // Espaçamento inicial
+        xAxis.min = minX > 0 ? minX - 1f : 0f; // EspaÃ§amento inicial
         xAxis.max = uniqueXValues.Count > 0 ? uniqueXValues.Max() : 10f; // Limita ao maior x
-        xAxis.boundaryGap = true; // Ativa gap automático (corrigido para bool)
+        xAxis.boundaryGap = true; // Ativa gap automÃ¡tico (corrigido para bool)
 
-        // Configurações do eixo Y (percentagem)
+        // ConfiguraÃ§Ãµes do eixo Y (percentagem)
         var yAxis = chart.EnsureChartComponent<YAxis>();
         yAxis.type = Axis.AxisType.Value;
         yAxis.axisLabel.show = true;
@@ -141,7 +141,11 @@ public class CSVBarChartPercentColumn : MonoBehaviour
         yAxis.max = 100;
         yAxis.axisLabel.formatter = "{value}%";
 
-        // Forçar atualização do gráfico
+
+        // âœ… Adicionar Ã  dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
+
+        // ForÃ§ar atualizaÃ§Ã£o do grÃ¡fico
         chart.RefreshChart();
     }
 }

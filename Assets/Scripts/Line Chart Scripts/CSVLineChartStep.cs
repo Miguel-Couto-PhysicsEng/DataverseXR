@@ -8,7 +8,7 @@ public class CSVLineChartStep : MonoBehaviour
     public GameObject chartPrefab;
     public string csvName;
 
-    public Vector3 spawnWorldScale = new Vector3(0.03f, 0.03f, 0.03f);
+    public Vector3 spawnWorldScale = new Vector3(0.9f, 0.9f, 0.9f);
 
     public void LoadCSVAndCreateChart(string csvName)
     {
@@ -111,6 +111,9 @@ public class CSVLineChartStep : MonoBehaviour
         xAxis.axisLine.show = true;
         xAxis.axisTick.show = true;
         xAxis.axisLabel.show = true;
+
+        // ✅ Adicionar à dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
     }
 }
 

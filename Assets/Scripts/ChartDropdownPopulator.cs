@@ -1,5 +1,4 @@
-﻿// ChartDropdownPopulator.cs
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using System.IO;
 using System.Linq;
@@ -25,7 +24,30 @@ public class ChartDropdownPopulator : MonoBehaviour
             "Basic Bar", "Percent Column", "Stacked Column", "Zebra Column"
         }},
 
-        { "Pie", new List<string> { "Basic", "Donut", "Rose" } }
+        { "Pie", new List<string> {
+            "Basic", "Donut", "Rose"
+        }},
+
+        { "Radar", new List<string> {
+            "Circle Radar", "Polygon Radar"
+        }},
+
+        { "Scatter", new List<string> {
+            "Basic", "Bubble"
+        }},
+        { "Polar", new List<string> {
+            "Polar Line"
+        }},
+        { "Candlestick", new List<string> {
+        "Candlestick"
+        }},
+        { "Ring", new List<string> {
+        "Ring"
+        }},
+        { "Parallel", new List<string> {
+        "Parallel"
+        }}
+
     };
 
     void Start()

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class CSVBarChartStackedColumn : MonoBehaviour
         TextAsset csvFile = Resources.Load<TextAsset>("CSVFiles/" + csvName);
         if (csvFile == null)
         {
-            Debug.LogError("Ficheiro CSV não encontrado: " + csvName);
+            Debug.LogError("Ficheiro CSV nÃ£o encontrado: " + csvName);
             return;
         }
 
@@ -30,7 +30,7 @@ public class CSVBarChartStackedColumn : MonoBehaviour
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("Canvas não encontrado na cena.");
+            Debug.LogError("Canvas nÃ£o encontrado na cena.");
             Destroy(chartGO);
             return;
         }
@@ -47,7 +47,7 @@ public class CSVBarChartStackedColumn : MonoBehaviour
         BaseChart chart = chartGO.GetComponent<BaseChart>();
         if (chart == null)
         {
-            Debug.LogError("O prefab não tem um componente BaseChart.");
+            Debug.LogError("O prefab nÃ£o tem um componente BaseChart.");
             return;
         }
 
@@ -68,17 +68,17 @@ public class CSVBarChartStackedColumn : MonoBehaviour
         int columnCount = headers.Length;
         int dataSeriesCount = columnCount - 1;
 
-        // Adiciona séries empilhadas
+        // Adiciona sÃ©ries empilhadas
         for (int s = 0; s < dataSeriesCount; s++)
         {
             var serie = chart.AddSerie<Bar>(headers[s + 1]);
             serie.stack = "total"; // Empilhamento para valores brutos
         }
 
-        // Lista para rastrear valores únicos de x
+        // Lista para rastrear valores Ãºnicos de x
         HashSet<float> uniqueXValues = new HashSet<float>();
 
-        // Lê os dados e empilha os valores brutos
+        // LÃª os dados e empilha os valores brutos
         for (int i = 1; i < lines.Length; i++)
         {
             string line = lines[i].Trim();
@@ -89,19 +89,19 @@ public class CSVBarChartStackedColumn : MonoBehaviour
 
             if (!float.TryParse(values[0], NumberStyles.Any, CultureInfo.InvariantCulture, out float xVal)) continue;
 
-            uniqueXValues.Add(xVal); // Adiciona xVal aos valores únicos
+            uniqueXValues.Add(xVal); // Adiciona xVal aos valores Ãºnicos
 
             for (int s = 0; s < dataSeriesCount; s++)
             {
                 if (float.TryParse(values[s + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out float yVal))
                 {
-                    Debug.Log($"x={xVal}, série={headers[s + 1]}, valor={yVal}"); // Depuração
+                    Debug.Log($"x={xVal}, sÃ©rie={headers[s + 1]}, valor={yVal}"); // DepuraÃ§Ã£o
                     chart.series[s].AddXYData(xVal, yVal);
                 }
             }
         }
 
-        // Configurações do eixo X (valores únicos com espaçamento inicial)
+        // ConfiguraÃ§Ãµes do eixo X (valores Ãºnicos com espaÃ§amento inicial)
         var xAxis = chart.EnsureChartComponent<XAxis>();
         xAxis.type = Axis.AxisType.Value;
         xAxis.axisLabel.show = true;
@@ -109,21 +109,25 @@ public class CSVBarChartStackedColumn : MonoBehaviour
         xAxis.axisTick.show = true;
         xAxis.minMaxType = Axis.AxisMinMaxType.Custom; // Controle manual
         float minX = uniqueXValues.Count > 0 ? uniqueXValues.Min() : 0f;
-        xAxis.min = minX > 0 ? minX - 1f : 0f; // Espaçamento inicial
+        xAxis.min = minX > 0 ? minX - 1f : 0f; // EspaÃ§amento inicial
         xAxis.max = uniqueXValues.Count > 0 ? uniqueXValues.Max() : 10f; // Limita ao maior x
-        xAxis.boundaryGap = true; // Ativa gap automático
+        xAxis.boundaryGap = true; // Ativa gap automÃ¡tico
 
-        // Configurações do eixo Y (valores brutos)
+        // ConfiguraÃ§Ãµes do eixo Y (valores brutos)
         var yAxis = chart.EnsureChartComponent<YAxis>();
         yAxis.type = Axis.AxisType.Value;
         yAxis.axisLabel.show = true;
         yAxis.axisLine.show = true;
         yAxis.axisTick.show = true;
         // Removido min=0 e max=100, deixado para autoajuste
-        // yAxis.min = 0; // Comente se quiser forçar zero
+        // yAxis.min = 0; // Comente se quiser forÃ§ar zero
         // yAxis.max = 100; // Removido limite de percentagem
 
-        // Forçar atualização do gráfico
+
+        // âœ… Adicionar Ã  dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
+
+        // ForÃ§ar atualizaÃ§Ã£o do grÃ¡fico
         chart.RefreshChart();
     }
 }

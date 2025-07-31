@@ -28,6 +28,28 @@ public class ChartMenuManager : MonoBehaviour
     public GameObject donutPieChartSpawner;
     public GameObject radiusRoseChartSpawner;
 
+    // Radar chart spawners
+    public GameObject radarCircleChartSpawner;
+    public GameObject radarPolygonChartSpawner;
+
+    // Scatter chart spawners
+    public GameObject scatterBasicChartSpawner;
+    public GameObject scatterBubbleChartSpawner;
+
+    // Polar chart spawners
+    public GameObject polarLineChartSpawner;
+
+    // Candlestick chart spawner
+    public GameObject candlestickChartSpawner;
+
+    // Ring chart spawner
+    public GameObject ringChartSpawner;
+
+    // Parallel chart spawner
+    public GameObject parallelChartSpawner;
+
+
+
     private TMP_Dropdown csvDropdown;
     private TMP_Dropdown chartTypeDropdown;
     private TMP_Dropdown chartStyleDropdown;
@@ -116,6 +138,85 @@ public class ChartMenuManager : MonoBehaviour
                     break;
             }
         }
+        else if (chartType == "Radar")
+        {
+            switch (chartStyle)
+            {
+                case "Circle Radar":
+                    radarCircleChartSpawner.GetComponent<CSVRadarCircleChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Polygon Radar":
+                    radarPolygonChartSpawner.GetComponent<CSVRadarPolygonChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de Radar não suportado: " + chartStyle);
+                    break;
+            }
+        }
+        else if (chartType == "Scatter")
+        {
+            switch (chartStyle)
+            {
+                case "Basic":
+                    scatterBasicChartSpawner.GetComponent<CSVScatterBasicChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                case "Bubble":
+                    scatterBubbleChartSpawner.GetComponent<CSVScatterBubbleChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de scatter não suportado: " + chartStyle);
+                    break;
+            }
+        }
+        else if (chartType == "Polar")
+        {
+            switch (chartStyle)
+            {
+                case "Polar Line":
+                    polarLineChartSpawner.GetComponent<CSVPolarLineChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de Polar não suportado: " + chartStyle);
+                    break;
+            }
+        }
+        else if (chartType == "Candlestick")
+        {
+            switch (chartStyle)
+            {
+                case "Candlestick":
+                    candlestickChartSpawner.GetComponent<CSVCandlestickChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de Candlestick não suportado: " + chartStyle);
+                    break;
+            }
+        }
+        else if (chartType == "Ring")
+        {
+            switch (chartStyle)
+            {
+                case "Ring":
+                    ringChartSpawner.GetComponent<CSVRingChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de Ring não suportado: " + chartStyle);
+                    break;
+            }
+        }
+        else if (chartType == "Parallel")
+        {
+            switch (chartStyle)
+            {
+                case "Parallel":
+                    parallelChartSpawner.GetComponent<CSVParallelChart>().LoadCSVAndCreateChart(csvName);
+                    break;
+                default:
+                    Debug.LogWarning("Estilo de Parallel não suportado: " + chartStyle);
+                    break;
+            }
+        }
+
         else
         {
             Debug.LogWarning("Tipo de gráfico não suportado: " + chartType);

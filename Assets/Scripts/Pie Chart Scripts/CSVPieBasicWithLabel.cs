@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using XCharts.Runtime;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +13,7 @@ public class CSVPieBasicWithLabel : MonoBehaviour
         TextAsset csvFile = Resources.Load<TextAsset>("CSVFiles/" + csvName);
         if (csvFile == null)
         {
-            Debug.LogError("Ficheiro CSV n„o encontrado: " + csvName);
+            Debug.LogError("Ficheiro CSV n√£o encontrado: " + csvName);
             return;
         }
 
@@ -28,7 +28,7 @@ public class CSVPieBasicWithLabel : MonoBehaviour
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("Canvas n„o encontrado.");
+            Debug.LogError("Canvas n√£o encontrado.");
             Destroy(chartGO);
             return;
         }
@@ -45,11 +45,11 @@ public class CSVPieBasicWithLabel : MonoBehaviour
         PieChart chart = chartGO.GetComponent<PieChart>();
         if (chart == null)
         {
-            Debug.LogError("Prefab n„o tem PieChart.");
+            Debug.LogError("Prefab n√£o tem PieChart.");
             return;
         }
 
-        // Adiciona tÌtulo
+        // Adiciona t√≠tulo
         var title = chart.EnsureChartComponent<Title>();
         title.text = "Basic Pie Chart";
 
@@ -63,11 +63,11 @@ public class CSVPieBasicWithLabel : MonoBehaviour
         legend.location.right = 5;
         legend.location.top = 5;
 
-        // Usa a sÈrie existente no prefab (serie0)
+        // Usa a s√©rie existente no prefab (serie0)
         Serie serie = chart.series.Count > 0 ? chart.series[0] : null;
         if (serie == null)
         {
-            Debug.LogError("serie0 n„o encontrada no PieChart.");
+            Debug.LogError("serie0 n√£o encontrada no PieChart.");
             return;
         }
 
@@ -87,6 +87,10 @@ public class CSVPieBasicWithLabel : MonoBehaviour
                 serie.AddData(new List<double> { val }, label);
             }
         }
+
+
+        // ‚úÖ Adicionar √† dropdown do ChartManager
+        FindFirstObjectByType<ChartManager>()?.AddChart(chartGO);
 
         chart.RefreshChart();
     }
