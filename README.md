@@ -23,7 +23,8 @@ To allow users to visually explore complex datasets in immersive environments, m
 - Full compatibility with Meta Quest 3 interactions (ray/poke/touch)  
 
 ## Demo Video
-[![Watch the demo](docs/screenshots/menu.png)]([https://drive.google.com/file/d/1pRJVKFX-BMJ3TJjhTwCZxWppejEEoyHm/view](https://drive.google.com/file/d/1pRJVKFX-BMJ3TjJhTwCZxWppejEEoyHm/view?usp=sharing))
+[Watch Demo Video]([https://drive.google.com/file/d/XXXXXXXXXXXX/view?usp=sharing](https://drive.google.com/file/d/1pRJVKFX-BMJ3TjJhTwCZxWppejEEoyHm/view?usp=drive_link))
+
 
 
 ## CSV File Structure  
