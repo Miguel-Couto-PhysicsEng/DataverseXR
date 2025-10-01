@@ -22,10 +22,9 @@ To allow users to visually explore complex datasets in immersive environments, m
 - Tooltips with dynamic coordinates in AR mode  
 - Full compatibility with Meta Quest 3 interactions (ray/poke/touch)  
 
-## Screenshots
+## Demo Video
+[Watch the demo video]([docs/demo.mp4](https://drive.google.com/file/d/1pRJVKFX-BMJ3TjJhTwCZxWppejEEoyHm/view?usp=drive_link))
 
-![Candlestick Chart Example](docs/screenshots/candlestick.png)  
-![AR Menu Example](docs/screenshots/menu.png)  
 
 ## CSV File Structure  
 
